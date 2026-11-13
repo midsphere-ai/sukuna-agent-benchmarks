@@ -1,0 +1,57 @@
+[project]
+name = "sukuna-gaia-agent"
+version = "0.1.0"
+description = "Multi-agent ReAct system for the GAIA benchmark, built on Exo (formerly Orbiter)"
+requires-python = ">=3.11"
+dependencies = [
+    # --- Orbiter framework packages (from Git branch) ---
+    "orbiter-core",
+    "orbiter-guardrail",
+    "orbiter-models",
+    "orbiter-mcp",
+    "orbiter-perplexica",
+    # --- Third-party dependencies ---
+    "aiohttp==3.11.12",
+    "mcp>=1.24.0",
+    "pydantic>=2.11.7",
+    "python-dateutil==2.9.0.post0",
+    "openai==1.108.0",
+    "cacheout==0.16.0",
+    "google-auth>=2.20.0",
+    "google-genai>=1.0.0",
+    "tiktoken>=0.7.0",
+    "textual>=3.0.0",
+]
+
+[tool.uv]
+default-groups = ['dev']
+
+[tool.uv.sources]
+orbiter-core = { git = "https://github.com/midsphere-ai/exo.git", subdirectory = "packages/orbiter-core", rev = "ralph/agent-core-feature-port" }
+orbiter-models = { git = "https://github.com/midsphere-ai/exo.git", subdirectory = "packages/orbiter-models", rev = "ralph/agent-core-feature-port" }
+orbiter-guardrail = { git = "https://github.com/midsphere-ai/exo.git", subdirectory = "packages/orbiter-guardrail", rev = "ralph/agent-core-feature-port" }
+orbiter-mcp = { git = "https://github.com/midsphere-ai/exo.git", subdirectory = "packages/orbiter-mcp", rev = "ralph/agent-core-feature-port" }
+orbiter-perplexica = { git = "https://github.com/midsphere-ai/exo.git", subdirectory = "packages/orbiter-perplexica", rev = "ralph/agent-core-feature-port" }
+
+[dependency-groups]
+dev = [
+    "autodoc-pydantic==2.2.0",
+    "coverage==7.7.1",
+    "pytest==8.3.5",
+    "pytest-asyncio>=1.0.0",
+    "pytest-html>=4.1.1",
+    "pytest-mock==3.14.0",
+    "ruff==0.11.2",
+]
+
+[tool.coverage.run]
+omit = ["tests/*"]
+
+[tool.pytest.ini_options]
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = ["-v", "--html=report/index.html", "--self-contained-html"]
+
+[project.optional-dependencies]
+pulsar = ["pulsar-client==3.5.0"]

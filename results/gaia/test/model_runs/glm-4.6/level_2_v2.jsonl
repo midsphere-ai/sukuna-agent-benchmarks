@@ -1,0 +1,140 @@
+{"task_id": "c80ed443-b494-4e86-bec8-10ecb41c2326", "model_answer": "rabbit"}
+{"task_id": "6583799b-573a-4e95-8b28-4f0397bd45c2", "model_answer": "Plan:\n- Task analysis\n  - Sub-task: identify correct page title\n  - Goal: avoid querying wrong article\n  - Action: search Wikipedia for Michael Myers character page\n- Gather revision history\n  - Sub-task: fetch earliest revision and per-Halloween-day revisions\n  - Goal: find earliest year with an edit on October 31 (UTC)\n  - Action: use MediaWiki API via file download; parse JSON\n- Integrate results\n  - Sub-task: analyze timestamps across years\n  - Goal: determine first Halloween-day edit year\n  - Action: parse downloaded revision data\n- Thinking process review\n  - Sub-task: guard against pitfalls\n  - Goal: ensure no oversight (UTC, title moves/redirects)\n  - Action: use guarding tool to diagnose reasoning\n\nStep 1: Information gathering (Wikipedia search)\n- Tool: wikipedia search\n- Execution: queried “Michael Myers Halloween character Wikipedia”\n- Result: confirmed the English page title “Michael Myers (Halloween)” with URL https://en.wikipedia.org/wiki/Michael_Myers_(Halloween)\n- Next: query revision history for this page\n\nStep 2: Tool attempt (API via terminal)\n- Tool: terminal Python script calling MediaWiki API\n- Result: initial attempt rejected due to security pattern; alternate attempt hit a parse error\n- Next: switch to download tool to fetch API JSON safely\n\nStep 3: Fetch earliest page revision\n- Tool: download file\n- Action: GET https://en.wikipedia.org/w/api.php?action=query&prop=revisions&titles=Michael_Myers_(Halloween)&rvprop=timestamp|ids&rvdir=newer&rvlimit=1&format=json\n- Result: saved mm_earliest_rev.json; parsed via terminal; earliest timestamp: 2004-09-25T13:15:34Z\n- Next: check edits on Oct 31 for successive years\n\nStep 4: Fetch per-year Halloween-day windows (parallel downloads)\n- Tool: parallel (download files)\n- Action: for years 2001–2010, requested revisions within Oct 31 UTC window using rvstart=YYYY-10-31T23:59:59Z, rvend=YYYY-10-31T00:00:00Z, rvdir=older, rvlimit=1\n- Result: saved mm_rev_YYYY.json for each target year\n- Next: parse each JSON to see if a revision exists that day\n\nStep 5: Parse and integrate results\n- Tool: terminal\n- Action: read each mm_rev_YYYY.json and report timestamps\n- Results:\n  - 2001–2005: no_revs (none on Oct 31)\n  - 2006: 2006-10-31T21:17:29Z (edit on Halloween)\n  - 2007: 2007-10-31T23:58:45Z\n  - 2008: 2008-10-31T23:07:24Z\n  - 2009: 2009-10-31T23:30:22Z\n  - 2010: 2010-10-31T23:59:49Z\n- Conclusion: earliest Halloween-day edit for the page is in 2006\n\nStep 6: Thinking process reviewing (mandatory guard tool)\n- Tool: guarding reasoning process\n- Diagnosis summary:\n  - Confirmed logic and UTC interpretation are sound\n  - Potential oversight: earlier edits could exist under different titles/redirects not merged into current page history\n  - Suggested checks: move logs and redirect histories (“What links here” → redirects → view history)\n- Decision: Based on earliest overall page existence in 2004 and zero Oct 31 edits in 2004–2005 for the current title, combined with successful Oct 31 edits from 2006 onward, the earliest year is 2006. If deeper move/redirect histories reveal a prior separate article, that could shift the date; however, for the current English Michael Myers character article, the first Halloween-day edit is 2006.\n\nFinal\n2006"}
+{"task_id": "12a682d7-8e8e-4d4c-8102-a97628027441", "model_answer": "3"}
+{"task_id": "4044eab7-1282-42bd-a559-3bf3a4d5858e", "model_answer": "978-0-439-02351-1"}
+{"task_id": "6ace0798-0d0f-4122-8705-78acebf23191", "model_answer": ""}
+{"task_id": "4033181f-1988-476b-bc33-6da0f96d7bd0", "model_answer": "December"}
+{"task_id": "7707f3dd-1aa6-42f5-847a-b66f3eaf2ee4", "model_answer": "1"}
+{"task_id": "cd886ddd-2d12-4347-9c7a-64774f66a3d3", "model_answer": "5"}
+{"task_id": "ac8e6d96-57a8-4936-a910-2bb04794b041", "model_answer": "Logitech"}
+{"task_id": "862862cb-519c-492a-8bee-309f3a8a5191", "model_answer": "24"}
+{"task_id": "c7d40b93-4ee9-4643-8a25-1bb1d5c00f06", "model_answer": "22.5, 799, 6.5 ; 22.5, 796.5, 6.5"}
+{"task_id": "ca0a4c14-4b97-43e7-8923-539d61050ae3", "model_answer": "50"}
+{"task_id": "15c0b8fe-d3be-45df-a759-13a488d4baaa", "model_answer": "Step 1: Task Analysis\n- Sub-task: Confirm the kit used in the paper and interpret “114 version”.\n  Goal: Verify the paper’s kit and map to the V14 equivalent (SQK-LSK114).\n  Action: Search and extract the methods section of the paper.\n- Sub-task: Retrieve official contents of SQK-LSK114 and identify cap colors and sticker/label notes.\n  Goal: Get authoritative “What’s in the box” table.\n  Action: Open the Oxford Nanopore store page and extract kit contents.\n- Sub-task: Apply filters and compute cumulative volume.\n  Goal: Sum volumes of opaque-capped vials without stickers.\n  Action: Exclude clear caps and any vials with sticker/label notes; sum remaining.\n\nStep 2: Information Gathering\n- Tool: Google Search\n  Execution: Searched for the paper.\n  Result: Found the paper on PMC (https://pmc.ncbi.nlm.nih.gov/articles/PMC9254642/).\n  Next: Open and extract methods.\n- Tool: Browser Automation\n  Execution: Opened the PMC article and extracted methods.\n  Result: Paper used Oxford Nanopore LSK109 for PromethION long-read sequencing.\n  Next: Retrieve SQK-LSK114 (V14) kit contents.\n- Tool: Google Search\n  Execution: Searched for SQK-LSK114 contents with cap colors and labels.\n  Result: Found ONT store page and third-party references.\n  Next: Extract official “What’s in the box” table.\n- Tool: Browser Automation\n  Execution: Opened ONT store page (https://store.nanoporetech.com/productDetail/?id=ligation-sequencing-kit-v14) and extracted table.\n  Result: Official contents including cap color, number of vials, and fill volume per vial:\n  - DCS (Yellow, 1 × 35 µl)\n  - LA (Green, 1 × 40 µl)\n  - AXP (Amber, 1 × 1200 µl)\n  - LNB (White, 1 × 200 µl)\n  - LFB (Orange, 2 × 1800 µl)\n  - SFB (Clear, 2 × 1800 µl) [clear]\n  - SB (Red, 1 × 700 µl)\n  - EB (Black, 1 × 500 µl)\n  - LIB (Pink, 1 × 600 µl)\n  - LIS (White cap, pink label, 1 × 600 µl) [label]\n  - FCF (Clear cap, light-blue label, 1 × 8000 µl) [clear + label]\n  - FCT (Purple, 1 × 200 µl)\n  Next: Apply filters and sum.\n\nStep 3: Tool Selection\n- Tools used: search_google, browser_use.\n- Rationale: Verify kit used in paper and extract authoritative kit contents.\n\nStep 4: Information Integrating\n- Filter criteria: Include only vials with opaque caps and without stickers/labels.\n- Excluded: SFB (clear), FCF (clear + label), LIS (label).\n- Included and volumes (µl):\n  - DCS 35\n  - LA 40\n  - AXP 1200\n  - LNB 200\n  - LFB 1800 × 2 = 3600\n  - SB 700\n  - EB 500\n  - LIB 600\n  - FCT 200\n- Sum in µl: 35 + 40 + 1200 + 200 + 3600 + 700 + 500 + 600 + 200 = 7075 µl\n- Convert to mL: 7075 µl = 7.075 mL\n\nStep 5: Thinking Process Reviewing\n- Tool: Guarding Reasoning Process\n  Execution: Reviewed assumptions, selection criteria, and data consistency.\n  Results:\n  - Assumption clarified: “114 version” refers to SQK-LSK114 (V14), the current version of the ligation kit type used (LSK109) in the paper.\n  - Criteria consistent: Treat colored caps (including amber) as opaque; labels (pink/light-blue) considered stickers for exclusion.\n  - Data priority: Used ONT official store values (EB = 500 µl) over third-party discrepancies.\n  - Arithmetic verified: 7075 µl → 7.075 mL.\n\nStep 6: Final Answer\n7.075"}
+{"task_id": "adfc0afb-3ef2-4e79-b66b-c49823b6b913", "model_answer": "2"}
+{"task_id": "68ff53a8-e1a1-42b0-9180-3c0a37187387", "model_answer": "none"}
+{"task_id": "48f56def-d539-4780-a3f5-591a925a88bf", "model_answer": "848"}
+{"task_id": "e20d0329-72bc-4634-ab37-47a217c2cfb6", "model_answer": "0"}
+{"task_id": "78cfc686-0e24-4e8e-acb4-291198301286", "model_answer": "11"}
+{"task_id": "3f9f12e1-c848-4925-afea-eb484e17e986", "model_answer": ""}
+{"task_id": "640e86a8-a261-4f6a-b507-0f510484eeff", "model_answer": "4"}
+{"task_id": "35320d83-246a-4367-8ed8-c04a93c68daa", "model_answer": "0"}
+{"task_id": "880c9d7d-aeb1-4fb0-a389-b9a88c451b50", "model_answer": "D.A.N., Do Anything Now"}
+{"task_id": "8f697523-6988-4c4f-8d72-760a45681f68", "model_answer": "1346"}
+{"task_id": "c265a892-f429-454a-bfc1-d2164b520a90", "model_answer": ""}
+{"task_id": "a0dcc222-691e-4b03-ac75-c4493991ab80", "model_answer": "Last Resort"}
+{"task_id": "02d0c7de-3cb6-43db-8b42-bb5be0923e28", "model_answer": "48.8583701, 2.2922926, east"}
+{"task_id": "f5d0b1c6-5e15-4c55-b60c-9fc855dda5cf", "model_answer": "2"}
+{"task_id": "c134398d-e1eb-4dab-97a1-6d9f715e53d0", "model_answer": "Step 1: Task Analysis and Plan\n- Compute ISBN-10 check digits for each of the nine 9-digit numbers.\n- Build a new 9-digit number from those check digits using order 587364921, substituting 0 for any X in this construction.\n- Compute the ISBN-10 check digit for the new 9-digit number.\n- Review reasoning with the guarding tool.\n- Provide the final check digit.\n\nStep 2: Execution Results\n- ISBN-10 check digits for the nine numbers:\n  1: 2, 2: X, 3: 3, 4: X, 5: 7, 6: 3, 7: 9, 8: 0, 9: 2\n- New 9-digit number (order 5,8,7,3,6,4,9,2,1; X→0): 709330202\n- ISBN-10 check digit of 709330202: 5\n\nStep 3: Thinking Process Review\n- Used the guarding reasoning tool to verify the formula, mapping, and arithmetic; no issues found.\n\nFinal\n5"}
+{"task_id": "07f6a90e-ee1d-4d2b-ae1d-3556d66a9e11", "model_answer": "Chinese Taipei"}
+{"task_id": "a4a37f5c-b160-43ed-8484-fe74572cb2c1", "model_answer": ""}
+{"task_id": "411e5d0e-52db-492f-97a3-bd93658c0357", "model_answer": "Step 1: Task Analysis and Plan\n- Sub-task: Download the YouTube video\n  - Goal: Obtain a local copy for analysis\n  - Action: Use the YouTube download tool for https://www.youtube.com/watch?v=NaKIiBMgg_M\n- Sub-task: Analyze the video/audio\n  - Goal: Identify the instrument being played\n  - Action: Use the video analysis tool to assess visuals and audio timbre\n- Sub-task: Cross-check web context\n  - Goal: Verify any instrumentation credits\n  - Action: Scrape the YouTube page and Bandcamp album page\n- Sub-task: Thinking Process Review\n  - Goal: Diagnose logical oversights\n  - Action: Use the guarding reasoning tool\n\nStep 2: Information Gathering\n- Tool: youtube__mcp_download_youtube_video\n  - Result: Downloaded file path: /Users/user/.../youtube_downloads/861866c0-1a5a-41ef-b085-868d1c03df5b.mp4\n- Tool: video__mcp_analyze_video (visual, 0–30s and 30–60s)\n  - Result: Static cover art showing a guitar-shaped case; no live performance footage\n- Tool: video__mcp_analyze_video (audio-focused)\n  - Result: Audio indicates a single strummed/finger-picked acoustic guitar with layered vocals; no electric guitar present; possibly faint bass/foot-tap\n- Tool: browser__mcp_browser_use (YouTube page)\n  - Result: No explicit instrument mentions in title/description/comments\n- Tool: browser/search (Bandcamp page)\n  - Result: Track page shows lyrics and release info; general album context includes “All instruments and voices by Dan Reeder” (via search snippet)\n\nStep 3: Tool Selection Rationale\n- Video analysis was used to infer instrument from audio timbre since visuals are static\n- Web page scraping used to validate any explicit credits\n\nStep 4: Information Integration\n- Audio timbre strongly matches acoustic guitar\n- No evidence of electric guitar; web pages do not contradict this\n\nStep 5: Thinking Process Review\n- Tool: maneuvering__mcp_guarding_reasoning_process\n  - Diagnosis: Conclusion “acoustic guitar” is sound; consider artist’s known use of handmade instruments. Minimal answer remains “acoustic guitar.”\n\nStep 6: FORMATTED ANSWER\nacoustic guitar"}
+{"task_id": "9ace56cc-2454-4de2-8e39-d8fec7be6f44", "model_answer": "Counter-Vandalism Unit"}
+{"task_id": "f94d6a97-9825-4308-8c69-fe6be4f6dff5", "model_answer": "1199"}
+{"task_id": "06d24738-d12e-484a-999a-b6119f4167f4", "model_answer": "yogurt plain nonfat"}
+{"task_id": "965a4ea3-bb77-4ddd-9ee6-3160a6f8b8ef", "model_answer": ""}
+{"task_id": "4e4b3e43-7240-47b2-8594-8dacd70ee12e", "model_answer": "black sesame seeds"}
+{"task_id": "c3c656c0-b288-476d-85d6-6d7a95ad19ef", "model_answer": ""}
+{"task_id": "d6f433d5-4203-47d4-990a-28dbf99e6afd", "model_answer": ""}
+{"task_id": "cca708f8-277f-4d9c-920c-26e8065b82ad", "model_answer": ""}
+{"task_id": "99b5ea36-0310-49c4-85d8-9ae83a96029a", "model_answer": ""}
+{"task_id": "35a5c13a-6012-461f-abfc-cde9e5a0a0dd", "model_answer": ""}
+{"task_id": "2bb16c35-403a-4d4c-859e-a88ccd55f876", "model_answer": ""}
+{"task_id": "56376d48-f456-4c24-a917-834be04c7608", "model_answer": ""}
+{"task_id": "44eb0217-9ba3-47c8-9e1c-6325d26e6f90", "model_answer": ""}
+{"task_id": "f4b55162-e06c-4ac0-be0e-78546bc87204", "model_answer": ""}
+{"task_id": "03c577c9-4227-48a9-9b75-f8f598de14c1", "model_answer": ""}
+{"task_id": "fe8f4748-5d00-4a27-9070-090a0cfdeac4", "model_answer": ""}
+{"task_id": "e8b226bf-2ccd-4748-973d-08dad7aa8253", "model_answer": ""}
+{"task_id": "208b8625-c49d-4cf1-95b6-4ced3bff82fb", "model_answer": ""}
+{"task_id": "074f5cd6-d287-49d6-bc0a-f7d40fbf2f08", "model_answer": ""}
+{"task_id": "2f14e114-55de-464f-af9b-82443c6ad5ba", "model_answer": ""}
+{"task_id": "44cb62e5-b0c5-4f12-b96f-21e80ed2062d", "model_answer": ""}
+{"task_id": "bb505145-7a10-4d23-8af9-39d2b833be3f", "model_answer": ""}
+{"task_id": "e463d411-6260-4d93-b5b4-6d9b1f619d5c", "model_answer": ""}
+{"task_id": "1c4c108b-fd1a-4251-8a23-20efeaefcae9", "model_answer": ""}
+{"task_id": "4810c253-7b06-447d-8bf6-64558ac5f00f", "model_answer": ""}
+{"task_id": "2372640f-a119-4960-b624-5ffbe81d6f3f", "model_answer": ""}
+{"task_id": "8aa22ddc-fe80-464c-9c96-8d534fa5c7d5", "model_answer": ""}
+{"task_id": "ffad7d0a-e20d-461f-b5be-07804917235d", "model_answer": ""}
+{"task_id": "04893fc3-34fc-4117-8457-a717ad01a6a9", "model_answer": ""}
+{"task_id": "25575ca4-9632-428a-8789-5a6910475451", "model_answer": ""}
+{"task_id": "0a8063da-eae2-4f84-8603-e71e8714ec23", "model_answer": ""}
+{"task_id": "b923ed47-f382-4c56-90fa-fbafb0ea1cca", "model_answer": ""}
+{"task_id": "24db55fc-5bd5-402e-8b85-f01d4d50d8c2", "model_answer": ""}
+{"task_id": "21aba0e0-03d6-4541-b467-a0384ca5298a", "model_answer": ""}
+{"task_id": "5093d134-9bc8-41c0-8dd2-094a59ddc002", "model_answer": ""}
+{"task_id": "be353748-74eb-4904-8f17-f180ce087f1a", "model_answer": ""}
+{"task_id": "021f63bc-b8cf-484d-a373-ca468fa8ab37", "model_answer": ""}
+{"task_id": "405c2f42-5d01-46d1-97eb-2e96b7cee542", "model_answer": ""}
+{"task_id": "0a3d99c6-d130-49a8-a8bc-6cd5999cc3b4", "model_answer": ""}
+{"task_id": "2e6c39b3-5988-4569-9401-3dde97425be6", "model_answer": ""}
+{"task_id": "00f49e33-3f00-4e8d-9ea5-a85bc7f3462f", "model_answer": ""}
+{"task_id": "55caccf7-8c3b-4d40-842a-825789f55dd7", "model_answer": ""}
+{"task_id": "4d317450-948c-4445-b15a-a170813a05e5", "model_answer": ""}
+{"task_id": "427348d3-797e-4bfc-88ef-d5780f982d58", "model_answer": ""}
+{"task_id": "6dc2ac8a-dfb8-48bc-a9f0-73d5435106b1", "model_answer": ""}
+{"task_id": "5c418120-2a9f-4bae-8aee-d37ac26f8465", "model_answer": ""}
+{"task_id": "d9060545-9e29-4a0b-8a1d-57211c462637", "model_answer": ""}
+{"task_id": "2698c8fa-868a-4ce6-9290-6cb397d1e071", "model_answer": ""}
+{"task_id": "e8df5ee8-e804-4ab4-a5b5-f737ffb7c37a", "model_answer": ""}
+{"task_id": "23bcfab0-f47b-4dcb-8599-459c329ac153", "model_answer": ""}
+{"task_id": "82b89810-1217-4ad8-aa9f-26e7c74ba6e5", "model_answer": ""}
+{"task_id": "b1a37359-2e2e-4521-bb3d-cecdf3ec5419", "model_answer": ""}
+{"task_id": "15b85766-24c0-4ee9-98f7-3ff237c89dc8", "model_answer": ""}
+{"task_id": "e87720bf-7dbe-49c2-b91c-bfc23b14d157", "model_answer": ""}
+{"task_id": "456cd699-e6f0-4729-a18e-077ffc7337c0", "model_answer": ""}
+{"task_id": "dbb02ff7-f947-491b-9ce2-41e3df16dbb8", "model_answer": ""}
+{"task_id": "e58ea654-994a-44fd-aaff-bf033c715c56", "model_answer": ""}
+{"task_id": "e47bd787-8024-425e-985c-7809bd992fa5", "model_answer": ""}
+{"task_id": "fb59de38-e688-43f9-a959-a687e6cd0ebc", "model_answer": ""}
+{"task_id": "e26e4f19-0c1c-430d-a881-66e52b9043f5", "model_answer": ""}
+{"task_id": "aac4df0d-407a-45f2-add5-d9b31ebe1ddc", "model_answer": ""}
+{"task_id": "698799a7-33df-4892-9ecd-76600ad91b96", "model_answer": ""}
+{"task_id": "c16acedc-7a4e-4df5-a007-200faa5c67e5", "model_answer": ""}
+{"task_id": "1b738608-485d-4456-98d3-31ad60f77284", "model_answer": ""}
+{"task_id": "9961d869-f827-4540-bcf0-1e09c2cba3b0", "model_answer": ""}
+{"task_id": "ff43a8cd-3850-42a4-bdb1-1eea53a8fcb7", "model_answer": ""}
+{"task_id": "d8f6be13-17f3-450a-b68f-89d7de943cf1", "model_answer": ""}
+{"task_id": "ed5e2ddd-6a3b-43a2-b6dc-a6c8862e06d7", "model_answer": ""}
+{"task_id": "6178671d-6f80-4e0d-9672-54afaf7b527b", "model_answer": ""}
+{"task_id": "b3654e47-4307-442c-a09c-945b33b913c6", "model_answer": ""}
+{"task_id": "d543b75f-96e6-4b04-bf2c-60acd0d48246", "model_answer": ""}
+{"task_id": "70e18502-7ff4-4aa7-85ed-f5587cc582c9", "model_answer": ""}
+{"task_id": "b4d2d683-7870-4940-8eaf-03cd1355873a", "model_answer": ""}
+{"task_id": "c7adc367-cf65-43f5-acc6-b3cc8b61c51e", "model_answer": ""}
+{"task_id": "900bb2d0-c2ae-43a6-b25b-62f96c3770e3", "model_answer": ""}
+{"task_id": "afd1efe6-03dd-478c-9eb1-e562355ee94e", "model_answer": ""}
+{"task_id": "f30a836f-420f-4738-80af-d2491e072dab", "model_answer": ""}
+{"task_id": "f1746e25-adf7-4565-8365-56f3d3536c92", "model_answer": ""}
+{"task_id": "cd8166fc-8a04-43b8-956a-785c6513671a", "model_answer": ""}
+{"task_id": "3cc53dbf-1ab9-4d21-a56a-fc0151c10f89", "model_answer": ""}
+{"task_id": "b548db79-fabd-4bbc-81f3-43097159a3a5", "model_answer": ""}
+{"task_id": "9b98305b-af16-489e-adbc-41b5c5a0ec2d", "model_answer": ""}
+{"task_id": "d50b8ecb-a8aa-4696-ad84-403ef15e2c8b", "model_answer": ""}
+{"task_id": "cebff819-f4d7-4b4a-8c42-31bed1a062c5", "model_answer": ""}
+{"task_id": "5f2b2e54-5047-4394-81be-198230c3b508", "model_answer": ""}
+{"task_id": "d219675a-0552-4fe0-8c5a-ae7365501f00", "model_answer": ""}
+{"task_id": "9aefe06d-0921-4941-96b4-154de9ee4f05", "model_answer": ""}
+{"task_id": "bb686773-a454-44d5-b193-cfccfdb90dee", "model_answer": ""}
+{"task_id": "633d1eae-8748-43e3-889a-0830c1c870c4", "model_answer": ""}
+{"task_id": "2b2e4e18-a825-4285-aeb1-8d93d2521627", "model_answer": ""}
+{"task_id": "59b3cfb0-a06a-4ac5-b54e-81c9db8b0957", "model_answer": ""}
+{"task_id": "f2fa52f6-fc8a-498c-98d3-17f66c848d1b", "model_answer": ""}
+{"task_id": "07c930f4-40a4-4be7-9165-ce8ad24bdbf9", "model_answer": ""}
+{"task_id": "063800f6-8832-4856-972b-17b877612533", "model_answer": ""}
+{"task_id": "462413b8-642c-4a4d-be27-1a9406100e31", "model_answer": ""}
+{"task_id": "c771f182-c66e-4c81-b1b8-80f924e7ca9a", "model_answer": ""}
+{"task_id": "5cb40f44-29b4-49de-a924-03e68191a994", "model_answer": ""}
+{"task_id": "763a8789-8aa9-4254-aa12-779bec9c7aef", "model_answer": ""}
+{"task_id": "e4b6ca51-c70d-45f7-90dd-cbd1790df1cb", "model_answer": ""}
+{"task_id": "fb488ce0-520c-4f3b-b953-b52b4130fb06", "model_answer": ""}
+{"task_id": "b201ae2a-fdab-4e13-a687-174d557d608a", "model_answer": ""}
+{"task_id": "fb349e07-d6c6-4d98-9a0e-1a3567f7d9bd", "model_answer": ""}
+{"task_id": "4866d2d0-e86f-4541-9801-4faa9b910a35", "model_answer": "2014"}
+{"task_id": "6de7d951-8dfe-449f-a808-76e2359b75b8", "model_answer": "6.58"}
+{"task_id": "b74b4ce7-4f03-42b5-b60e-62da7ffa282e", "model_answer": "harry's steakhouse"}
+{"task_id": "d366cc70-86f1-4dca-bf12-440479c825fe", "model_answer": "5"}
+{"task_id": "3013b87b-dc19-466a-b803-6b7239b9fd9c", "model_answer": "1.971"}
+{"task_id": "ed30357a-9648-49fd-8d34-a78e71d0984c", "model_answer": "22.73"}
+{"task_id": "a582f258-4e42-47db-8669-4280537fe223", "model_answer": "blue, purple, white, yellow"}

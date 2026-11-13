@@ -1,0 +1,31 @@
+{
+  "split": "validation",
+  "tasks": 165,
+  "correct": 140,
+  "accuracy_percent": 84.85,
+  "by_level": {
+    "1": {
+      "tasks": 53,
+      "correct": 45
+    },
+    "2": {
+      "tasks": 86,
+      "correct": 76
+    },
+    "3": {
+      "tasks": 26,
+      "correct": 19
+    }
+  },
+  "scoring": "GAIA leaderboard scorer, run locally with results/gaia/score_validation.py",
+  "note": "Best of five passes between 2025-08-09 and 2025-09-26. After each pass only the tasks scored wrong were run again, so this is not a single-run score.",
+  "first_full_pass": {
+    "date": "2025-08-09",
+    "tasks": 165,
+    "correct_as_recorded_at_the_time": 120
+  },
+  "recorded_at_the_time": {
+    "correct": 141,
+    "reason_for_difference": "one task (f3917a3d) was scored against a different gold answer than the one in the dataset copy we rescored with"
+  }
+}

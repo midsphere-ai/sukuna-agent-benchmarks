@@ -1,0 +1,22 @@
+# secrets
+.env
+.env.*
+!.env.example
+
+# datasets are downloaded, never committed
+data/
+
+# run output
+gaia/runs/
+imo/output/
+*.log
+
+# python
+__pycache__/
+*.pyc
+.venv/
+.venv-tool/
+report/
+
+# os
+.DS_Store
